@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+      TZ: Asia/Seoul
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+
+  backend:
+    image: node:20-alpine
+    container_name: nest_backend
+    working_dir: /app
+    depends_on:
+      - db
+    environment:
+      DB_TYPE: ${DB_TYPE}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    command: sh -c "if [ -f package-lock.json ]; then npm ci; elif [ -f package.json ]; then npm install; else echo '❌ /app 에 package.json 없음'; ls -la; exit 1; fi; npm run start:dev"
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+
+  frontend:
+    image: node:20-alpine
+    container_name: react_frontend
+    working_dir: /app
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: sh -c "npm ci || npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    ports:
+      - "5173:5173"
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  db_data:
