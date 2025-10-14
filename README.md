@@ -7,14 +7,14 @@
 ## 📂 Project Structure
 
 
-
+```
 stagebridge/
 ├── backend/ # NestJS backend (submodule)
 ├── frontend/ # React frontend (submodule)
 ├── .env.example # Environment variable template
 ├── docker-compose.yml # Multi-container configuration
 └── README.md # Project documentation
-
+```
 
 ---
 
