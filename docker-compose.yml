@@ -30,7 +30,6 @@ services:
       DB_DATABASE: ${DB_DATABASE}
     volumes:
       - ./backend:/app
-      - /app/node_modules
     env_file:
       - .env
     command: sh -c "if [ -f package-lock.json ]; then npm ci; elif [ -f package.json ]; then npm install; else echo '❌ /app 에 package.json 없음'; ls -la; exit 1; fi; npm run start:dev"
@@ -47,7 +46,6 @@ services:
       - backend
     volumes:
       - ./frontend:/app
-      - /app/node_modules
     command: sh -c "npm ci || npm install && npm run dev -- --host 0.0.0.0 --port 5173"
     ports:
       - "5173:5173"
