@@ -1,7 +1,7 @@
 [submodule "backend"]
 	path = backend
 	url = git@github.com:stagebridge/backend.git
-	branch = feature/api-separation-and-swagger
+	branch = main
 [submodule "frontend"]
 	path = frontend
 	url = git@github.com:stagebridge/frontend.git
