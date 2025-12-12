@@ -1,0 +1,12 @@
+[1mdiff --git a/backend b/backend[m
+[1m--- a/backend[m
+[1m+++ b/backend[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit 82f53687c394df0633fe1ff9508f924def23f473[m
+[32m+[m[32mSubproject commit 82f53687c394df0633fe1ff9508f924def23f473-dirty[m
+[1mdiff --git a/frontend b/frontend[m
+[1m--- a/frontend[m
+[1m+++ b/frontend[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit e14abb9a4c5bdf4f06f186dcc54bca0b2ad2c982[m
+[32m+[m[32mSubproject commit e14abb9a4c5bdf4f06f186dcc54bca0b2ad2c982-dirty[m
